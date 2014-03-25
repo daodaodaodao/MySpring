@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache updateCheck="false" name="hibernateCache">
+
+	<diskStore path="java.io.tmpdir/ehcache/daodao/hibernate" />
+
+	<!-- DefaultCache setting. -->
+	<defaultCache eternal="false"
+		timeToIdleSeconds="300" timeToLiveSeconds="600" overflowToDisk="true"/>
+
+	<!-- Special objects setting. 
+	<cache name="com.huachen.ibdp.bf.entity.User"
+		maxEntriesLocalHeap="1000" eternal="true" overflowToDisk="true"
+		maxEntriesLocalDisk="10000" />
+	<cache name="com.huachen.ibdp.bf.entity.User.menus"
+		maxEntriesLocalHeap="1000" eternal="true" overflowToDisk="true"
+		maxEntriesLocalDisk="10000" />
+	<cache name="com.huachen.ibdp.bf.entity.User.functions"
+		maxEntriesLocalHeap="1000" eternal="true" overflowToDisk="true"
+		maxEntriesLocalDisk="10000" />
+	<cache name="com.huachen.ibdp.bf.entity.User.roles"
+		maxEntriesLocalHeap="1000" eternal="true" overflowToDisk="true"
+		maxEntriesLocalDisk="10000" />
+	<cache name="com.huachen.ibdp.bf.entity.Menu"
+		maxEntriesLocalHeap="1000" eternal="true" overflowToDisk="true"
+		maxEntriesLocalDisk="10000" />
+	<cache name="com.huachen.ibdp.bf.entity.Function"
+		maxEntriesLocalHeap="1000" eternal="true" overflowToDisk="true"
+		maxEntriesLocalDisk="10000" />
+	<cache name="com.huachen.ibdp.bf.entity.DictCatalogItem"
+		maxEntriesLocalHeap="1000" eternal="true" overflowToDisk="true"
+		maxEntriesLocalDisk="10000" />
+	<cache name="com.huachen.ibdp.bf.entity.DictCatalog"
+		maxEntriesLocalHeap="1000" eternal="true" overflowToDisk="true"
+		maxEntriesLocalDisk="10000" />
+	<cache name="com.huachen.ibdp.bf.entity.UserExclusiveTime"
+		maxEntriesLocalHeap="1000" eternal="true" overflowToDisk="true"
+		maxEntriesLocalDisk="10000" />
+	<cache name="com.huachen.ibdp.bf.entity.Organization"
+		maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"
+		maxEntriesLocalDisk="1000" />
+	<cache name="com.huachen.ibdp.bf.entity.Role"
+		maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"
+		maxEntriesLocalDisk="1000" />
+	<cache name="com.huachen.ibdp.bf.entity.Role.menus"
+		maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"
+		maxEntriesLocalDisk="1000" />
+	<cache name="com.huachen.ibdp.bf.entity.Role.functions"
+		maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"
+		maxEntriesLocalDisk="1000" />
+	<cache name="com.huachen.ibdp.bf.entity.Role.users"
+		maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"
+		maxEntriesLocalDisk="1000" />
+	<cache name="com.huachen.ibdp.search.entity.HotKeywords"
+		maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"
+		maxEntriesLocalDisk="1000" />
+	-->
+</ehcache>

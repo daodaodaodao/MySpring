@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	<description>导入IBDP中的applicationContext文件列表</description>
+	
+	<!-- 	
+	<import resource="jms/applicationContext-jms.xml" />
+	<import resource="schedule/applicationContext-spring-scheduler.xml" />		
+	<import resource="search/applicationContext-search.xml" />
+	<import resource="captcha/applicationContext-captcha.xml" />
+	<import resource="email/applicationContext-email.xml" />
+	<import resource="sms/applicationContext-sms.xml" />
+	<import resource="webservice/applicationContext-ws.xml" />
+	<import resource="security/applicationContext-shiro.xml" />
+	-->
+	
+	<import resource="ehcache/applicationContext-ehcache.xml" />
+</beans>
