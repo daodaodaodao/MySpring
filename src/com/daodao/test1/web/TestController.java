@@ -1,19 +1,18 @@
-package com.daodao.hr.web;
+package com.daodao.test1.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "/daodao/hr/dept")
-public class DepartmentController {
+@RequestMapping(value = "/daodao/test1/test")
+public class TestController {
+	
 
-	@RequestMapping(value = "list")
+	@RequestMapping(value = "")
 	public String test(Model model) {
 		
-		
-		
-		return "/hr/departmentList";
+		return "/test1/test";
 	}
 
 }

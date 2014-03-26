@@ -19,7 +19,7 @@ public class BaseEntity implements Serializable{
 	
 	private String id;
 
-	private Date createdAt = new Date();
+	private Date createdAt = new java.util.Date();
 	private Date modifiedAt;
 	private Boolean deleted=false;
 
