@@ -9,7 +9,7 @@
 	<body>
 
 		<div class="list-group">
-			<a href="${ctx}/daodao/hr/dept/list" class="list-group-item">
+			<a href="${ctx}/daodao/hr/dept/list" class="list-group-item active">
 				部门列表
 			</a>
 			<a href="javascript:void(0)" class="list-group-item">
