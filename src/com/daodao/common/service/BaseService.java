@@ -175,8 +175,8 @@ public abstract class BaseService<T extends BaseEntity> {
 	 */
 	public T getById(String id) throws ServiceException {
 		T t = getDao().findOne(id);
-		if (t == null || (t.getDeleted() != null && t.getDeleted() == true)) {
-			throw new ServiceException("数据已被删除、或不存在！");
+		if (t == null || t.getDeleted()) {
+			return null;
 		}
 		return t;
 	}
