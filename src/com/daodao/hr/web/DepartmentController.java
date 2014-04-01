@@ -5,23 +5,26 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletRequest;
+import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.daodao.common.web.Servlets;
 import com.daodao.hr.entity.Dept;
 import com.daodao.hr.service.DepartmentService;
 
-@Controller
+@RestController
 @RequestMapping(value = "/daodao/hr/dept")
 public class DepartmentController {
 	
@@ -29,9 +32,10 @@ public class DepartmentController {
 	DepartmentService deptService;
 
 	@RequestMapping(value = "list")
-	public String deptList(Model model,
+	public ModelAndView deptList(//Model model,
 			@RequestParam(value="search_deptNo",required=false) String deptNo,
-			@RequestParam(value="search_deptName",required=false) String deptName) {
+			@RequestParam(value="search_deptName",required=false) String deptName,
+			@RequestParam(value="search_page",required=false) String currentPage) {
 		
 		String hql = "from Dept where deleted = false";
 		List<Object> searchParams =  new ArrayList<Object>();
@@ -47,58 +51,94 @@ public class DepartmentController {
 		
 		hql +=" order by createdAt desc ";
 		
-		Page<Dept> depts =  this.deptService.getHqlPageInfo(hql, 1, 10, searchParams);
+		int page = 1;
+		if( StringUtils.isNotEmpty(currentPage) ){
+			page = Integer.valueOf(currentPage);
+			
+		}
 		
-		model.addAttribute("depts", depts);
+		Page<Dept> depts =  this.deptService.getHqlPageInfo(hql, page, 10, searchParams);
 		
-		return "/hr/departmentList";
+		//model.addAttribute("depts", depts);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("depts", depts);
+		modelAndView.setViewName("/hr/departmentList");
+		
+		return modelAndView;
 	}
 	
 	@RequestMapping(value = "addForm")
-	public String addDeptForm(){
+	public ModelAndView addDeptForm(){
 		
-		return "/hr/departmentForm";
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/hr/departmentForm");
+		
+		return modelAndView;
 		
 	}
 	
 	@RequestMapping(value = "updateForm/{id}")
-	public String updateDeptForm(Model model,
+	public ModelAndView updateDeptForm(//Model model,
 			ServletRequest request,
 			@PathVariable(value="id") String id){
 
 		Map<String, Object> searchParams = Servlets.getParametersStartingWith(
 				request, "search_");
 		
-		model.addAttribute("searchParams", searchParams);
-		model.addAttribute("dept", this.deptService.getById(id));
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("dept", this.deptService.getById(id));
+		modelAndView.addObject("searchParams", searchParams);
+		modelAndView.setViewName("/hr/departmentForm");
 		
-		return "/hr/departmentForm";
+		return modelAndView;
 		
 	}
 	
 	@RequestMapping(value = "update")
-	public String updateDept(ServletRequest request,
-			@ModelAttribute Dept dept,
-			RedirectAttributes redirectAttributes){
+	public ModelAndView updateDept(@Valid @ModelAttribute Dept dept,
+			BindingResult result, Model model,
+			RedirectAttributes redirectAttributes,
+			ServletRequest request){
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+        if(result.hasErrors()) {
+    		modelAndView.addObject("dept", dept);
+    		modelAndView.setViewName("/hr/departmentForm");
+    		return modelAndView;
+        }  
 		
 		this.deptService.update(dept);
 
 		Map<String, Object> searchParams = Servlets.getParametersStartingWith(
 				request, "search_");
+		modelAndView = new ModelAndView("redirect:/daodao/hr/dept/list", searchParams);
 		
-		redirectAttributes.addAllAttributes(searchParams);
-		
-		return "redirect:/daodao/hr/dept/list";
+		return modelAndView;
 		
 	}
 	
 	@RequestMapping(value = "delete/{id}")
-	public String deleteDept(Model model,
+	public ModelAndView deleteDept(Model model,ServletRequest request,
 			@PathVariable(value="id") String id){
 		
 		this.deptService.deleteForFlag(id);
+
+		Map<String, Object> searchParams = Servlets.getParametersStartingWith(
+				request, "search_");
 		
-		return "redirect:/daodao/hr/dept/list";
+		ModelAndView modelAndView = new ModelAndView("redirect:/daodao/hr/dept/list",searchParams);
+		
+		return modelAndView;
+	} 
+	
+    @RequestMapping("/test") 
+    public Dept viewJsonXml() {
+		Dept dept = new Dept();  
+		dept.setDeptName("jsonXmlName");
+		dept.setDeptNo("jsonXmlNo");
+		return dept;  
 	}
 			
 	

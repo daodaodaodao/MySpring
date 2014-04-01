@@ -22,7 +22,9 @@ import com.daodao.common.repository.BaseDao;
 
 public abstract class BaseService<T extends BaseEntity> {
 
-	protected abstract BaseDao<T> getDao();
+	//protected abstract BaseDao<T> getDao();
+	@Autowired
+	protected BaseDao<T> dao;
 
 	@PersistenceContext
 	public EntityManager entityManager;
@@ -141,7 +143,7 @@ public abstract class BaseService<T extends BaseEntity> {
 	@Transactional(readOnly = false)
 	public T update(T t) {
 		this.fillBaseProperties(t);
-		return this.getDao().save(t);
+		return this.dao.save(t);
 	}
 
 	/**
@@ -162,9 +164,9 @@ public abstract class BaseService<T extends BaseEntity> {
 
 	@Transactional(readOnly = false)
 	public void deleteForFlag(String id) {
-		T t = this.getDao().findOne(id);
+		T t = this.dao.findOne(id);
 		t.setDeleted(true);
-		this.getDao().save(t);
+		this.dao.save(t);
 	}
 
 	/**
@@ -174,7 +176,7 @@ public abstract class BaseService<T extends BaseEntity> {
 	 * @return
 	 */
 	public T getById(String id) throws ServiceException {
-		T t = getDao().findOne(id);
+		T t = dao.findOne(id);
 		if (t == null || t.getDeleted()) {
 			return null;
 		}
