@@ -38,6 +38,11 @@
         <version>${org.springframework.version}</version>  
     </dependency> 
     <dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-test</artifactId>
+	    <version>${org.springframework.version}</version>
+	</dependency>
+    <dependency>
 	    <groupId>org.hibernate</groupId>
 	    <artifactId>hibernate-core</artifactId>
 	    <version>${org.hibernate.version}</version>
@@ -81,6 +86,11 @@
 	    <groupId>javax</groupId>
 	    <artifactId>javaee-api</artifactId>
 	    <version>7.0</version>
+	</dependency>
+	<dependency>
+	    <groupId>junit</groupId>
+	    <artifactId>junit</artifactId>
+	    <version>4.11</version>
 	</dependency>
   </dependencies>
   <build>

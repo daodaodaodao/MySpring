@@ -88,7 +88,7 @@
 	</bean>
 	
 	<!-- production环境 -->
-	<beans profile="production">
+	<!-- <beans profile="production">-->
 	
 		<context:property-placeholder ignore-unresolvable="true"
 			location="classpath*:/application.properties" />
@@ -114,6 +114,14 @@
 				value="3600000" />
 			<property name="minEvictableIdleTimeMillis" value="3600000" />
 		</bean>
-	</beans>
+	<!-- </beans>-->
+	
+	<bean id="taskExecutor"
+	    class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+	    <property name="corePoolSize" value="3" />
+	    <property name="keepAliveSeconds" value="200" />
+	    <property name="maxPoolSize" value="5" />
+	    <property name="queueCapacity" value="25" />
+	  </bean>
 			
 </beans>
